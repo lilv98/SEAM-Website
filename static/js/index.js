@@ -1,30 +1,50 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
+// Global variables for sorting
+let currentSortColumn = -1;
+let currentSortDirection = 'asc';
+
 // Leaderboard sorting functionality
 function sortTable(columnIndex) {
+    console.log('sortTable called with columnIndex:', columnIndex);
+    
     const table = document.getElementById('leaderboard');
     const tbody = document.getElementById('leaderboard-body');
+    
+    if (!table || !tbody) {
+        console.error('Table or tbody not found');
+        return;
+    }
+    
     const rows = Array.from(tbody.querySelectorAll('tr')).filter(row => 
         !row.classList.contains('proprietary-header') && 
         !row.classList.contains('opensource-header')
     );
     
+    console.log('Found rows:', rows.length);
+    
+    // Determine sort direction
+    let isAscending = true;
+    if (currentSortColumn === columnIndex) {
+        isAscending = currentSortDirection === 'desc';
+    }
+    
+    currentSortColumn = columnIndex;
+    currentSortDirection = isAscending ? 'asc' : 'desc';
+    
     // Separate proprietary and open-source models
     const proprietaryRows = rows.filter(row => row.dataset.category === 'proprietary');
     const opensourceRows = rows.filter(row => row.dataset.category === 'opensource');
     
-    // Get current sort direction
+    // Update header indicators
     const headers = table.querySelectorAll('th.sortable');
-    const currentHeader = headers[columnIndex];
-    const isAscending = currentHeader.classList.contains('sort-desc');
-    
-    // Clear all sort indicators
     headers.forEach(header => {
         header.classList.remove('sort-asc', 'sort-desc');
     });
     
-    // Set current sort indicator
-    currentHeader.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+    if (headers[columnIndex]) {
+        headers[columnIndex].classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+    }
     
     // Sort function
     function sortRows(rowsArray) {
@@ -45,8 +65,8 @@ function sortTable(columnIndex) {
     }
     
     // Sort both categories
-    const sortedProprietary = sortRows(proprietaryRows);
-    const sortedOpensource = sortRows(opensourceRows);
+    const sortedProprietary = sortRows([...proprietaryRows]);
+    const sortedOpensource = sortRows([...opensourceRows]);
     
     // Clear tbody and rebuild
     tbody.innerHTML = '';
@@ -66,34 +86,65 @@ function sortTable(columnIndex) {
     tbody.appendChild(opensourceHeader);
     
     sortedOpensource.forEach(row => tbody.appendChild(row));
+    
+    console.log('Table sorted successfully');
 }
 
 $(document).ready(function() {
-    // Check for click events on the navbar burger icon
-
+    console.log('Document ready - initializing...');
+    
+    // Carousel functionality
     var options = {
-		slidesToScroll: 1,
-		slidesToShow: 1,
-		loop: true,
-		infinite: true,
-		autoplay: true,
-		autoplaySpeed: 5000,
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        loop: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
     }
 
-	// Initialize all div with carousel class
+    // Initialize all div with carousel class
     var carousels = bulmaCarousel.attach('.carousel', options);
-	
     bulmaSlider.attach();
 
-    // Add click handlers for sortable columns
-    document.querySelectorAll('.sortable').forEach((header, index) => {
-        header.addEventListener('click', () => sortTable(index));
-    });
+    // Setup sorting functionality
+    setTimeout(function() {
+        console.log('Setting up table sorting...');
+        
+        // Use event delegation to handle clicks
+        $(document).off('click', '.sortable').on('click', '.sortable', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const columnIndex = parseInt($(this).data('column'));
+            console.log('Column clicked:', columnIndex);
+            
+            if (!isNaN(columnIndex)) {
+                sortTable(columnIndex);
+            } else {
+                console.error('Invalid column index:', $(this).data('column'));
+            }
+        });
+        
+        // Add visual feedback
+        $('.sortable').each(function() {
+            $(this).css('cursor', 'pointer');
+            console.log('Added cursor pointer to column:', $(this).data('column'));
+        });
+        
+        console.log('Found sortable headers:', $('.sortable').length);
+        console.log('Table setup complete');
+        
+    }, 500); // Increased timeout to ensure DOM is fully loaded
 
     // Initial sort by L-V Agreement (column 5) in descending order
-    const lvAgreementHeader = document.querySelector('[data-column="5"]');
-    if (lvAgreementHeader) {
-        lvAgreementHeader.classList.add('sort-desc');
-    }
-
-})
+    setTimeout(function() {
+        const lvAgreementHeader = document.querySelector('[data-column="5"]');
+        if (lvAgreementHeader) {
+            lvAgreementHeader.classList.add('sort-desc');
+            currentSortColumn = 5;
+            currentSortDirection = 'desc';
+        }
+    }, 600);
+    
+});

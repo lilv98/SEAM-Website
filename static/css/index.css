@@ -135,13 +135,16 @@ body {
 
 /* Leaderboard styles */
 .sortable {
-    cursor: pointer;
+    cursor: pointer !important;
     user-select: none;
     position: relative;
+    background-color: #fafafa;
+    transition: background-color 0.2s;
 }
 
 .sortable:hover {
-    background-color: #f0f0f0;
+    background-color: #e8e8e8 !important;
+    color: #333 !important;
 }
 
 .sortable::after {
