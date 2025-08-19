@@ -52,7 +52,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">SEAM: Semantically Equivalent Across Modalities Benchmark for Vision-Language Models</h1>
+            <h1 class="title is-2 publication-title"><strong>SEAM</strong>: Semantically Equivalent Across Modalities Benchmark for Vision-Language Models</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
@@ -67,7 +67,7 @@
                   </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>Department of Computer Science, University of Toronto<br><sup>2</sup>Coolwei AI Lab<br>Second Conference on Language Modeling (COLM) 2025</span>
+                    <span class="author-block"><sup>1</sup><a href="https://csslab.cs.toronto.edu/" target="_blank">CSSLab</a>, Department of Computer Science, University of Toronto<br><sup>2</sup>Coolwei AI Lab<br>[COLM '25] Second Conference on Language Modeling</span>
                   </div>
 
                   <div class="is-size-5 publication-authors">
@@ -135,7 +135,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
+        <div class="content has-text-justified is-size-4">
           <p>
             Evaluating whether vision–language models (VLMs) reason consistently across representations is challenging because modality comparisons are typically confounded by task differences and asymmetric information. We introduce <strong>SEAM</strong>, a benchmark that pairs semantically equivalent inputs across four domains with existing standardized textual and visual notations. By employing distinct notation systems across modalities, in contrast to OCR-based image-text pairing, SEAM provides a rigorous comparative assessment of the textual-symbolic and visual-spatial reasoning capabilities of VLMs. Across 21 contemporary models, we observe systematic modality imbalance: vision frequently lags language in overall performance, despite the problems containing semantically equivalent information, and cross-modal agreement is relatively low. Our error analysis reveals two main drivers: textual perception failures from tokenization in domain notations and visual perception failures that induce hallucinations. We also show that our results are largely robust to visual transformations. SEAM establishes a controlled, semantically equivalent setting for measuring and improving modality-agnostic reasoning.
           </p>
@@ -151,24 +151,34 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Results</h2>
+      <h2 class="title is-3 has-text-centered">Overview</h2>
       
       <!-- Main Results Figure -->
       <div class="columns is-centered" style="margin-bottom: 3rem;">
         <div class="column is-four-fifths has-text-centered">
           <img src="static/images/main.png" alt="Main results showing SEAM benchmark performance" style="max-width: 100%; height: auto;"/>
           <h3 class="subtitle has-text-centered" style="margin-top: 1rem;">
-            <strong>Main Results:</strong> Overview of SEAM benchmark performance across vision-language models, showing systematic modality imbalances and cross-modal agreement patterns.
+            <strong>SEAM</strong> includes 16 tasks in chess, chemistry, music, and graph theory domains with paired visual-spatial and textual-symbolic representations that are semantically equivalent.
           </h3>
         </div>
       </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Results</h2>
 
       <!-- Accuracy vs Agreement -->
       <div class="columns is-centered">
         <div class="column is-four-fifths has-text-centered">
           <img src="static/images/acc_vs_agr.png" alt="Accuracy vs Agreement scatter plot" style="max-width: 100%; height: auto;"/>
           <h3 class="subtitle has-text-centered" style="margin-top: 1rem;">
-            <strong>Accuracy vs Agreement:</strong> Demonstrating the relationship between model performance and cross-modal consistency across different domains and tasks.
+            <strong>Accuracy vs Agreement:</strong> Correlation between final answer agreement rates with language and vision inputs and average accuracy across various models. Models are color-coded by family. Random Baseline denotes how often two models with identical accuracy $p$ would agree by random chance, which can be thought of as a lower bound for cross-modal agreement of real multimodal models. Cross-modal answer agreement is relatively low, i.e., often not far from the random baseline, suggesting that models differ substantially in how they process information across modalities, and have substantial room to improve in integrating reasoning and leveraging abilities across representations.
           </h3>
         </div>
       </div>
@@ -457,37 +467,6 @@
     </div>
   </div>
 </section>
-
-<!-- Benchmark Overview -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Benchmark Overview</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <div class="content has-text-justified">
-            <p>
-              SEAM addresses fundamental limitations in existing benchmarks through its utilization of distinct notation systems and preservation of semantic equivalence across modalities. By leveraging domain-specific standardized representations in:
-            </p>
-            <ul>
-              <li><strong>Chess</strong>: Board images vs. FEN strings</li>
-              <li><strong>Chemistry</strong>: Structural diagrams vs. SMILES strings</li>
-              <li><strong>Music</strong>: Staff images vs. ABC notations</li>
-              <li><strong>Graph Theory</strong>: Node-edge diagrams vs. adjacency matrices</li>
-            </ul>
-            <p>
-              SEAM presents both visual-spatial and textual-symbolic representations while maintaining semantic equivalence. The benchmark comprises 16 carefully calibrated tasks designed to be self-contained in both modalities with 3,200 four-way multiple-choice questions in total.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
 
 
 
