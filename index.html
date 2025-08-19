@@ -133,7 +133,7 @@
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified is-size-4">
           <p>
@@ -168,29 +168,6 @@
 </section>
 
 
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Results</h2>
-
-      <!-- Accuracy vs Agreement -->
-      <div class="columns is-centered">
-        <div class="column is-four-fifths has-text-centered">
-          <img src="static/images/acc_vs_agr.png" alt="Accuracy vs Agreement scatter plot" style="max-width: 100%; height: auto;"/>
-          <h3 class="subtitle has-text-centered" style="margin-top: 1rem;">
-            <strong>Accuracy vs Agreement:</strong> Correlation between final answer agreement rates with language and vision inputs and average accuracy across various models. Models are color-coded by family. Random Baseline denotes how often two models with identical accuracy $p$ would agree by random chance, which can be thought of as a lower bound for cross-modal agreement of real multimodal models. Cross-modal answer agreement is relatively low, i.e., often not far from the random baseline, suggesting that models differ substantially in how they process information across modalities, and have substantial room to improve in integrating reasoning and leveraging abilities across representations.
-          </h3>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-<!-- End results images -->
-
-
-
-
 <!-- Leaderboard -->
 <section class="hero is-small is-light">
   <div class="hero-body">
@@ -199,7 +176,7 @@
       <div class="columns is-centered">
         <div class="column">
           <p class="has-text-centered" style="margin-bottom: 1.5rem;">
-            Interactive leaderboard of proprietary and open-source VLMs across language (L), vision (V), and vision-language (VL) modalities. 
+            Interactive leaderboard of VLMs across language (L), vision (V), and vision-language (VL) modalities. 
             <strong>Click column headers to sort.</strong> Models are initially sorted by L-V agreement.
           </p>
           
@@ -212,7 +189,7 @@
                   <th class="sortable" data-column="2">V Accuracy</th>
                   <th class="sortable" data-column="3">VL Accuracy</th>
                   <th class="sortable" data-column="4">Avg Accuracy</th>
-                  <th class="sortable" data-column="5" style="background-color: #f5f5f5;"><strong>L-V Agreement ↓</strong></th>
+                  <th class="sortable" data-column="5" style="background-color: #f5f5f5;"><strong>L-V Agreement</strong></th>
                   <th class="sortable" data-column="6">L-VL Agreement</th>
                   <th class="sortable" data-column="7">V-VL Agreement</th>
                   <th class="sortable" data-column="8">All Agreement</th>
@@ -467,6 +444,27 @@
     </div>
   </div>
 </section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Accuracy vs Agreement</h2>
+
+      <!-- Accuracy vs Agreement -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths has-text-centered">
+          <img src="static/images/acc_vs_agr.png" alt="Accuracy vs Agreement scatter plot" style="max-width: 100%; height: auto;"/>
+          <h3 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Correlation between final answer agreement rates with language and vision inputs and average accuracy across various models. Models are color-coded by family. Random Baseline denotes how often two models with identical accuracy would agree by random chance, which can be thought of as a lower bound for cross-modal agreement of real multimodal models. Cross-modal answer agreement is relatively low, i.e., often not far from the random baseline, suggesting that models differ substantially in how they process information across modalities, and have substantial room to improve in integrating reasoning and leveraging abilities across representations.
+          </h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- End results images -->
 
 
 
